@@ -18,16 +18,16 @@ else
  installsoft=''
  installdc=''
  installmuzlab=''
- magname=$(ex -s +16p +q setting.txt)
- magpass=$(ex -s +17p +q setting.txt)
- DCadmin=$(ex -s +18p +q setting.txt)
- magdc=$(ex -s +20p +q setting.txt)
- maglogin=$(ex -s +21p +q setting.txt)
- gittoken=$(ex -s +22p +q setting.txt)
- installupdate=$(ex -s +23p +q setting.txt)
- installsoft=$(ex -s +24p +q setting.txt)
- installdc=$(ex -s +25p +q setting.txt)
- installmuzlab=$(ex -s +26p +q setting.txt)
+ magname=$(ex -s +15p +q setting.txt)
+ magpass=$(ex -s +16p +q setting.txt)
+ DCadmin=$(ex -s +17p +q setting.txt)
+ magdc=$(ex -s +18p +q setting.txt)
+ maglogin=$(ex -s +19p +q setting.txt)
+ gittoken=$(ex -s +20p +q setting.txt)
+ installupdate=$(ex -s +21p +q setting.txt)
+ installsoft=$(ex -s +22p +q setting.txt)
+ installdc=$(ex -s +23p +q setting.txt)
+ installmuzlab=$(ex -s +24p +q setting.txt)
  
  if [ $magname == $magnameerr ]; then
    echo "Please, change magname setting.txt"
@@ -91,12 +91,12 @@ else
  hostnamectl set-hostname $magname
  #install soft
  apt-get install -y cifs-utils
- sudo mkdir /media/shops
- sudo chmod 777 /media/shops
- sudo mkdir /media/videoforto
- sudo chmod 777 /media/videoforto
- sudo mkdir /media/support
- sudo chmod 777 /media/support
+ mkdir /media/shops
+ chmod 777 /media/shops
+ mkdir /media/videoforto
+ chmod 777 /media/videoforto
+ mkdir /media/support
+ chmod 777 /media/support
  #set fstab
  numberOfString="$(grep -n shops /etc/fstab | cut -d: -f1)"
  if [ "$numberOfString" -ge 1 ]; then
@@ -131,6 +131,10 @@ else
    apt remove pulseaudio -y
    echo "muzlab installed" >> /home/rootmt/report.txt
  fi
+ mkdir /home/rootmt/deploy_ubuntu20/done
+ chown -R rootmt:rootmt /home/rootmt/deploy_ubuntu20/done
+ mv "/home/rootmt/deploy_ubuntu20/1start.sh" "/home/rootmt/deploy_ubuntu20/done/1start.sh"
  echo "*********** Done!!! *****************************"
  echo "************************** Done!!! **************" >> /home/rootmt/report.txt
+ shutdown -r now
 fi

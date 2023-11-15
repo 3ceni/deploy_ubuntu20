@@ -5,31 +5,6 @@ if [[ $EUID -ne 0 ]]; then
  exit 1
 else 
  echo "*********** start install soft*****************" >> /home/rootmt/report.txt
- magname=''
- magnameerr='mag000'
- magpass=''
- DCadmin=''
- passdc=''
- DCadminerr='NULLadmin'
- magdc=''
- maglogin=''
- tempstr=''
- gittoken=''
- installupdate=''
- installsoft=''
- installdc=''
- installmuzlab=''
- magname=$(ex -s +16p +q setting.txt)
- magpass=$(ex -s +17p +q setting.txt)
- DCadmin=$(ex -s +18p +q setting.txt)
- passdc=$(ex -s +19p +q setting.txt)
- magdc=$(ex -s +20p +q setting.txt)
- maglogin=$(ex -s +21p +q setting.txt)
- gittoken=$(ex -s +22p +q setting.txt)
- installupdate=$(ex -s +23p +q setting.txt)
- installsoft=$(ex -s +24p +q setting.txt)
- installdc=$(ex -s +25p +q setting.txt)
- installmuzlab=$(ex -s +26p +q setting.txt)
  #install soft
  apt-get install mc net-tools gnome-tweak-tool htop curl -y
  echo "utilites installed" >> /home/rootmt/report.txt
@@ -51,14 +26,17 @@ else
  sed -i 's/LANG="en_US.UTF-8"/LANG="ru_RU.UTF-8"/' /etc/default/locale
  echo "LANGUAGE=\"ru:en\"" >> '/etc/default/locale'
  #Copy files
- cp "/media/support/WP_Linux/11/MuzLab/Установка на ubuntu.docx" "/home/rootmt/Установка на ubuntu.docx"
- cp "/media/support/WP_Linux/7-canon/3010-linux-UFRII-drv-v550-us-00.tar.gz" "/home/rootmt/3010-linux-UFRII-drv-v550-us-00.tar.gz"
- cp "/media/support/WP_Linux/Viber/viber.AppImage" "/home/rootmt/viber.AppImage"
- cp "/media/support/WP_Linux/Viber/Viber.desktop" "/home/rootmt/Viber.desktop"
- cp "/media/support/WP_Linux/1С_Плэй_Хард.rdp" "/home/rootmt/1С_Плэй_Хард.rdp"
- cp "/media/support/WP_Linux/Инструкция по работе (rev2).docx" "/home/rootmt/Инструкция по работе (rev2).docx"
+ mkdir /home/rootmt/phfiles
+ cp "/media/support/WP_Linux/11/MuzLab/Установка на ubuntu.docx" "/home/rootmt/phfiles/Установка на ubuntu.docx"
+ cp "/media/support/WP_Linux/7-canon/3010-linux-UFRII-drv-v550-us-00.tar.gz" "/home/rootmt/phfiles/3010-linux-UFRII-drv-v550-us-00.tar.gz"
+ cp "/media/support/WP_Linux/Viber/viber.AppImage" "/home/rootmt/phfiles/viber.AppImage"
+ cp "/media/support/WP_Linux/Viber/Viber.desktop" "/home/rootmt/phfiles/Viber.desktop"
+ cp "/media/support/WP_Linux/1С_Плэй_Хард.rdp" "/home/rootmt/phfiles/1С_Плэй_Хард.rdp"
+ cp "/media/support/WP_Linux/Инструкция по работе (rev2).docx" "/home/rootmt/phfiles/Инструкция по работе (rev2).docx"
+ chown -R rootmt:rootmt /home/rootmt/phfiles
  echo "phfiles coped" >> /home/rootmt/report.txt
  #extract archiv
+ cd phfiles
  tar xvzf 3010-linux-UFRII-drv-v550-us-00.tar.gz
  cd linux-UFRII-drv-v550-us
  echo -e "y\n" | sudo ./install.sh
@@ -81,6 +59,17 @@ else
  apt remove gnome-sudoku -y
  apt remove aisleriot -y
  echo "games removed" >> /home/rootmt/report.txt
+ #set Volume alsamixer
+ amixer -c 0 set Master 84%
+ amixer -c 0 set Headphone 84%
+ amixer -c 0 set PCM 84%
+ amixer -c 0 set Front 84%
+ amixer -c 0 set Surround 84%
+ amixer -c 0 set Center 84%
+ amixer -c 0 set LFE 84%
+ amixer -c 0 set Line 84%
+ amixer -c 0 set 'Line boost' 53%
+ echo "Set alsamixer complite" >> /home/rootmt/report.txt
  #install winrar (snap)
  snap install winrar
  echo "winrar installed" >> /home/rootmt/report.txt
@@ -91,16 +80,12 @@ else
  apt install fuse binutils -y
  echo "Viber installed" >> /home/rootmt/report.txt
  
- if [ $installdc == 0 ]; then
-   echo "connect to DC not need" >> /home/rootmt/report.txt 
- else
-   touch /etc/rc.local
-   echo "#!/bin/bash" >> /etc/rc.local
-   sed -i 's/2phsoft.sh/3phdc.sh/' /etc/rc.local
-   echo "exit 0" >> /etc/rc.local   
-   echo "connect to DC will be connected after reboot" >> /home/rootmt/report.txt
- fi
+ #delete file autorun
+ systemctl disable rc-local
+ rm -f /etc/rc.local
+ mv "/home/rootmt/deploy_ubuntu20/2phsoft.sh" "/home/rootmt/deploy_ubuntu20/done/2phsoft.sh"
  
  echo "*********** Done! install soft*****************" >> /home/rootmt/report.txt
  echo "Done!!!"
+ shutdown -r now
 fi
