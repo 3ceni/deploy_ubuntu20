@@ -18,16 +18,16 @@ else
  installsoft=''
  installdc=''
  installmuzlab=''
- magname=$(ex -s +15p +q setting.txt)
- magpass=$(ex -s +16p +q setting.txt)
- DCadmin=$(ex -s +17p +q setting.txt)
- magdc=$(ex -s +18p +q setting.txt)
- maglogin=$(ex -s +19p +q setting.txt)
- gittoken=$(ex -s +20p +q setting.txt)
- installupdate=$(ex -s +21p +q setting.txt)
- installsoft=$(ex -s +22p +q setting.txt)
- installdc=$(ex -s +23p +q setting.txt)
- installmuzlab=$(ex -s +24p +q setting.txt)
+ magname=$(ex -s +16p +q setting.txt)
+ magpass=$(ex -s +17p +q setting.txt)
+ DCadmin=$(ex -s +18p +q setting.txt)
+ magdc=$(ex -s +20p +q setting.txt)
+ maglogin=$(ex -s +21p +q setting.txt)
+ gittoken=$(ex -s +22p +q setting.txt)
+ installupdate=$(ex -s +23p +q setting.txt)
+ installsoft=$(ex -s +24p +q setting.txt)
+ installdc=$(ex -s +25p +q setting.txt)
+ installmuzlab=$(ex -s +26p +q setting.txt)
  
  if [ $magname == $magnameerr ]; then
    echo "Please, change magname setting.txt"
@@ -73,6 +73,18 @@ else
    apt update -y 
    apt upgrade -y
    echo "update/upgrade installed" >> /home/rootmt/report.txt
+ fi
+ 
+ if [ $installsoft == 0 ]; then
+   echo "phsoft not need" >> /home/rootmt/report.txt 
+ else
+   touch /etc/rc.local
+   echo "#!/bin/bash" >> /etc/rc.local
+   echo "/home/rootmt/deploy_ubuntu20/2phsoft.sh" >> /etc/rc.local
+   echo "exit 0" >> /etc/rc.local
+   chmod +x /etc/rc.local
+   systemctl enable rc-local
+   echo "phsoft will be installed after reboot" >> /home/rootmt/report.txt
  fi
  
  #set hostname
