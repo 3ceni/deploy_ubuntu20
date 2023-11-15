@@ -4,6 +4,7 @@ if [[ $EUID -ne 0 ]]; then
  echo "This script must be run as root" 
  exit 1
 else
+ echo "*************** start ************************" >> /home/rootmt/report.txt
  magname=''
  magnameerr='mag000'
  magpass=''
@@ -66,7 +67,7 @@ else
  echo "fonts installed" >> /home/rootmt/report.txt
  
  if [ $installupdate == 0 ]; then
-   echo "Update/Upgrade not need" 
+   echo "update/upgrade not need" >> /home/rootmt/report.txt 
  else
    echo "Update Ubuntu"
    apt update -y 
@@ -85,34 +86,32 @@ else
  sudo mkdir /media/support
  sudo chmod 777 /media/support
  #set fstab
- numberOfString=grep -n shops /etc/fstab | cut -d: -f1
- if [ $numberOfString >= 1 ]; then
+ numberOfString="$(grep -n shops /etc/fstab | cut -d: -f1)"
+ if [ "$numberOfString" -ge 1 ]; then
    echo "Folder shops is exist" >> /home/rootmt/report.txt    
  else
    echo "//10.8.29.4/shops /media/shops cifs user,username="$maglogin",password="$magpass",iocharset=utf8,file_mode=0777,dir_mode=0777  0 0" >> '/etc/fstab'
    echo "Folder shops add" >> /home/rootmt/report.txt
  fi
  
- numberOfString=grep -n videoforto /etc/fstab | cut -d: -f1
- if [ $numberOfString >= 1 ]; then
+ numberOfString="$(grep -n videoforto /etc/fstab | cut -d: -f1)"
+ if [ "$numberOfString" -ge 1 ]; then
    echo "Folder videoforto is exist" >> /home/rootmt/report.txt    
  else
    echo "//10.8.29.4/videoforto /media/videoforto cifs user,username="$maglogin",password="$magpass",iocharset=utf8,file_mode=0777,dir_mode=0777  0 0" >> /etc/fstab
    echo "Folder videoforto add" >> /home/rootmt/report.txt
  fi
  
- numberOfString=grep -n support /etc/fstab | cut -d: -f1
- if [ $numberOfString >= 1 ]; then
+ numberOfString="$(grep -n support /etc/fstab | cut -d: -f1)"
+ if [ "$numberOfString" -ge 1 ]; then
    echo "Folder support is exist" >> /home/rootmt/report.txt    
  else
    echo "//10.6.6.119/Distrib/Linux /media/support cifs user,username=support,password=zsedcX2019$,iocharset=utf8,file_mode=0777,dir_mode=0777  0 0" >> /etc/fstab
    echo "Folder support add" >> /home/rootmt/report.txt
  fi
   
- echo "net folders installed" >> /home/rootmt/report.txt
-  
  if [ $installmuzlab == 0 ]; then
-    echo "Muzlab not need" 
+    echo "muzlab not installed" >> /home/rootmt/report.txt 
  else
    echo -e "690f326c\n" | su root
    cd ~
@@ -120,6 +119,6 @@ else
    apt remove pulseaudio -y
    echo "muzlab installed" >> /home/rootmt/report.txt
  fi
-
- echo "Done!!!"
+ echo "*********** Done!!! *****************************"
+ echo "************************** Done!!! **************" >> /home/rootmt/report.txt
 fi

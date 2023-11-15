@@ -14,7 +14,7 @@
 ******************************************************************************************
 mag000
 2Wsxzaq1000
-lapko
+NULLadmin
 mag000.FIXMT.LOCAL
 mag000@fixmt.local
 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
