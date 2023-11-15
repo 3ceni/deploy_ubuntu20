@@ -1,4 +1,18 @@
-mag328
+*****************************************************************************************
+******* file Setting.txt*****************************************************************
+******* need change *********************************************************************
+**** magname=mag000			(default) For example: mag111, mag369
+**** magpass=2Wsxzaq1000		(default) For example: 2Wsxzaq1234, 2Wsxzaq1321
+**** DCadmin=NULLadmin			(default) For example: surname, ibragim
+**** magdc=mag000.FIXMT.LOCAL		(default) For example: mag342.FIXMT.LOCAL
+**** maglogin=mag000@fixmt.local	(default) For example: mag163@fixmt.local
+**** gittoken=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 (not need change)
+**** installupdate=1 - (1 - need update, 		0 - not need update)
+**** installsoft=1   - (1 - need soft , 		0 - not need soft) 
+**** installdc=1     -	(1 - need connect to DC ,	0 - not need connect to DC)
+**** installmuzlab=1 - (1 - need install MuzLab , 	0 - not need install MuzLab)
+******************************************************************************************
+mag000
 2Wsxzaq1000
 lapko
 mag000.FIXMT.LOCAL
