@@ -79,7 +79,10 @@ else
  #install viber
  apt install fuse binutils -y
  echo "Viber installed" >> /home/rootmt/report.txt
- 
+ # copy code muzlab
+ magname=$(ex -s +15p +q setting.txt)
+ cat /home/mopidy/.muzlab_device_binding_code > /media/support/ALL_mag/$magname
+ echo "Muzlab code copied" >> /home/rootmt/report.txt
  #delete file autorun
  systemctl disable rc-local
  rm -f /etc/rc.local
