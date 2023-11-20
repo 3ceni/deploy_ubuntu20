@@ -37,8 +37,8 @@ else
  echo "phfiles coped" >> /home/rootmt/report.txt
  #extract archiv
  cd phfiles
- tar xvzf 3010-linux-UFRII-drv-v550-us-00.tar.gz
- cd linux-UFRII-drv-v550-us
+ tar xvzf /home/rootmt/phfiles/3010-linux-UFRII-drv-v550-us-00.tar.gz
+ cd /home/rootmt/phfiles/linux-UFRII-drv-v550-us
  echo -e "y\n" | sudo ./install.sh
  echo "driver MF3010 installed" >> /home/rootmt/report.txt
  cd ..
@@ -60,15 +60,15 @@ else
  apt remove aisleriot -y
  echo "games removed" >> /home/rootmt/report.txt
  #set Volume alsamixer
- amixer -c 0 set Master 84%
- amixer -c 0 set Headphone 84%
- amixer -c 0 set PCM 84%
- amixer -c 0 set Front 84%
- amixer -c 0 set Surround 84%
- amixer -c 0 set Center 84%
- amixer -c 0 set LFE 84%
- amixer -c 0 set Line 84%
- amixer -c 0 set 'Line boost' 53%
+ amixer -c 0 set Master 100%
+ amixer -c 0 set Headphone 100%
+ amixer -c 0 set PCM 100%
+ amixer -c 0 set Front 100%
+ amixer -c 0 set Surround 100%
+ amixer -c 0 set Center 100%
+ amixer -c 0 set LFE 100%
+ amixer -c 0 set Line 100%
+ amixer -c 0 set "Line boost" 100%
  echo "Set alsamixer complite" >> /home/rootmt/report.txt
  #install winrar (snap)
  snap install winrar

@@ -53,8 +53,10 @@ else
  echo "Folder for user setup" >> /home/rootmt/report.txt
  sed -i '/support/d' /etc/fstab
  mv "/home/rootmt/deploy_ubuntu20/4DC.sh" "/home/rootmt/deploy_ubuntu20/done/4DC.sh"
- rm -f /home/rootmt/deploy_ubuntu20
-# echo "folder git removed" >> /home/rootmt/report.txt
+ rm -R -f /home/rootmt/deploy_ubuntu20
+ rm -f /home/rootmt/0.txt
+ rm -f /home/rootmt/0git.sh
+ echo "folder git removed" >> /home/rootmt/report.txt
  echo "Done!!!"
  echo "*********** Done connect to dc *****************" >> /home/rootmt/report.txt
  shutdown -r now
