@@ -36,7 +36,7 @@ else
  chown -R rootmt:rootmt /home/rootmt/phfiles
  echo "phfiles coped" >> /home/rootmt/report.txt
  #extract archiv
- cd phfiles
+ cd /home/rootmt/phfiles
  tar xvzf /home/rootmt/phfiles/3010-linux-UFRII-drv-v550-us-00.tar.gz
  cd /home/rootmt/phfiles/linux-UFRII-drv-v550-us
  echo -e "y\n" | sudo ./install.sh
