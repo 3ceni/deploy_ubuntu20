@@ -118,7 +118,7 @@ else
  if [ "$numberOfString" -ge 1 ]; then
    echo "Folder support is exist" >> /home/rootmt/report.txt    
  else
-   echo "//10.6.6.119/Distrib/Linux /media/support cifs user,username=support,password=zsedcX2019$$,iocharset=utf8,file_mode=0777,dir_mode=0777  0 0" >> /etc/fstab
+   echo "//10.6.6.119/Distrib/Linux /media/support cifs user,username=support,password=zsedcX2019$,iocharset=utf8,file_mode=0777,dir_mode=0777  0 0" >> /etc/fstab
    echo "Folder support add" >> /home/rootmt/report.txt
  fi
   
